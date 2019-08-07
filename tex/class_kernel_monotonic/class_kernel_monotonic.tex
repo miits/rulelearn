@@ -1,0 +1,234 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+
+\newcommand{\distplot}[4]{
+\begin{tikzpicture}
+\begin{axis}[
+height = 70,
+width = 0.8\textwidth,
+xbar stacked,
+axis y line = none,
+axis x line = none,
+xmin = 0,
+nodes near coords,
+every node near coord/.append style={yshift=10pt},
+]
+\addplot coordinates {(#1,0)};
+\addplot coordinates {(#2,0)};
+\addplot coordinates {(#3,0)};
+\addplot coordinates {(#4,0)};
+\end{axis}
+\end{tikzpicture}
+}
+
+\newcommand{\distplotlegend}[4]{
+\begin{tikzpicture}
+\begin{axis}[
+height = 70,
+width = 0.8\textwidth,
+xbar stacked,
+axis y line = none,
+axis x line = none,
+xmin = 0,
+nodes near coords,
+every node near coord/.append style={yshift=10pt},
+legend style={at={(0.5,-0.1)},anchor=north,draw=none,column sep=1ex,},
+legend columns=-1
+]
+\addplot coordinates {(#1,0)};
+\addplot coordinates {(#2,0)};
+\addplot coordinates {(#3,0)};
+\addplot coordinates {(#4,0)};
+\addlegendentry{Safe};
+\addlegendentry{Borderline};
+\addlegendentry{Rare};
+\addlegendentry{Outlier};
+\end{axis}
+\end{tikzpicture}
+}
+\begin{document}
+balance\_scale
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+4=>B & 4=>L & \distplot{0}{0}{0}{49} & 49 \\ 
+4=>B & 4=>R & \distplot{0}{0}{0}{49} & 49 \\ 
+4=>L & 4=>B & \distplot{272}{16}{0}{0} & 288 \\ 
+4=>R & 4=>B & \distplotlegend{272}{16}{0}{0} & 288 \\ 
+\bottomrule
+\end{tabular}
+breast-cancer\_nm
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+7=>recurrence\_events & 7=>no\_recurrence\_events & \distplotlegend{56}{28}{46}{40} & 170 \\ 
+\bottomrule
+\end{tabular}
+breast-w
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+9=>malignant & 9=>benign & \distplotlegend{352}{12}{0}{118} & 482 \\ 
+\bottomrule
+\end{tabular}
+breast-w\_nm
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+9=>malignant & 9=>benign & \distplotlegend{342}{12}{2}{126} & 482 \\ 
+\bottomrule
+\end{tabular}
+car
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+6=>acc & 6=>unacc & \distplot{539}{0}{0}{121} & 660 \\ 
+6=>good & 6=>acc & \distplot{99}{0}{0}{48} & 147 \\ 
+6=>vgood & 6=>good & \distplotlegend{90}{0}{0}{0} & 90 \\ 
+\bottomrule
+\end{tabular}
+cpu
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+6=>0 & 6=>1 & \distplot{84}{4}{0}{12} & 100 \\ 
+6=>1 & 6=>2 & \distplot{42}{0}{0}{11} & 53 \\ 
+6=>2 & 6=>1 & \distplot{40}{4}{0}{9} & 53 \\ 
+6=>2 & 6=>3 & \distplot{42}{2}{0}{9} & 53 \\ 
+6=>3 & 6=>2 & \distplotlegend{43}{2}{0}{8} & 53 \\ 
+\bottomrule
+\end{tabular}
+dataset1\_noid
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+16=>2 & 16=>1 & \distplotlegend{358}{24}{2}{52} & 436 \\ 
+\bottomrule
+\end{tabular}
+dataset3
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+11=>1 & 11=>2 & \distplot{338}{42}{2}{104} & 486 \\ 
+11=>2 & 11=>3 & \distplot{217}{5}{0}{74} & 296 \\ 
+11=>3 & 11=>2 & \distplot{254}{3}{0}{100} & 357 \\ 
+11=>3 & 11=>4 & \distplot{252}{6}{0}{99} & 357 \\ 
+11=>4 & 11=>3 & \distplot{223}{4}{0}{81} & 308 \\ 
+11=>5 & 11=>4 & \distplotlegend{140}{40}{4}{64} & 248 \\ 
+\bottomrule
+\end{tabular}
+denbosch
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+8=>1 & 8=>0 & \distplotlegend{92}{4}{0}{22} & 118 \\ 
+\bottomrule
+\end{tabular}
+ERA\_n
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+4=>1 & 4=>2 & \distplot{0}{0}{0}{184} & 184 \\ 
+4=>2 & 4=>3 & \distplot{0}{0}{0}{142} & 142 \\ 
+4=>3 & 4=>2 & \distplot{0}{0}{0}{181} & 181 \\ 
+4=>3 & 4=>4 & \distplot{0}{0}{0}{181} & 181 \\ 
+4=>4 & 4=>3 & \distplot{0}{0}{0}{172} & 172 \\ 
+4=>4 & 4=>5 & \distplot{0}{0}{0}{172} & 172 \\ 
+4=>5 & 4=>4 & \distplot{0}{0}{0}{158} & 158 \\ 
+4=>5 & 4=>6 & \distplot{0}{0}{0}{158} & 158 \\ 
+4=>6 & 4=>5 & \distplot{0}{0}{0}{118} & 118 \\ 
+4=>6 & 4=>7 & \distplot{0}{0}{0}{118} & 118 \\ 
+4=>7 & 4=>6 & \distplot{0}{0}{0}{88} & 88 \\ 
+4=>8 & 4=>7 & \distplot{0}{0}{0}{80} & 80 \\ 
+4=>9 & 4=>8 & \distplotlegend{0}{0}{0}{36} & 36 \\ 
+\bottomrule
+\end{tabular}
+ESL\_n
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+4=>1 & 4=>2 & \distplot{0}{0}{0}{4} & 4 \\ 
+4=>2 & 4=>3 & \distplot{13}{0}{0}{13} & 26 \\ 
+4=>3 & 4=>4 & \distplot{28}{12}{10}{40} & 90 \\ 
+4=>4 & 4=>5 & \distplot{49}{7}{5}{39} & 100 \\ 
+4=>5 & 4=>4 & \distplot{76}{11}{2}{27} & 116 \\ 
+4=>5 & 4=>6 & \distplot{69}{17}{3}{27} & 116 \\ 
+4=>6 & 4=>5 & \distplot{79}{23}{0}{33} & 135 \\ 
+4=>7 & 4=>6 & \distplot{78}{0}{8}{61} & 147 \\ 
+4=>8 & 4=>7 & \distplot{5}{10}{0}{27} & 42 \\ 
+4=>9 & 4=>8 & \distplotlegend{0}{0}{0}{8} & 8 \\ 
+\bottomrule
+\end{tabular}
+housing
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+13=>1 & 13=>2 & \distplot{92}{1}{0}{34} & 127 \\ 
+13=>2 & 13=>1 & \distplot{95}{3}{0}{26} & 124 \\ 
+13=>2 & 13=>3 & \distplot{95}{3}{0}{26} & 124 \\ 
+13=>3 & 13=>2 & \distplot{90}{5}{0}{36} & 131 \\ 
+13=>4 & 13=>3 & \distplotlegend{192}{6}{0}{50} & 248 \\ 
+\bottomrule
+\end{tabular}
+LEV\_n
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+4=>0 & 4=>1 & \distplot{0}{0}{0}{186} & 186 \\ 
+4=>1 & 4=>2 & \distplot{314}{215}{68}{56} & 653 \\ 
+4=>3 & 4=>2 & \distplot{0}{0}{0}{421} & 421 \\ 
+4=>4 & 4=>3 & \distplotlegend{0}{0}{0}{54} & 54 \\ 
+\bottomrule
+\end{tabular}
+SWD\_n
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+10=>2 & 10=>3 & \distplot{10}{16}{20}{18} & 64 \\ 
+10=>3 & 10=>4 & \distplot{326}{252}{102}{56} & 736 \\ 
+10=>5 & 10=>4 & \distplotlegend{112}{212}{76}{34} & 434 \\ 
+\bottomrule
+\end{tabular}
+windsor
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+10=>0 & 10=>1 & \distplot{132}{56}{0}{86} & 274 \\ 
+10=>1 & 10=>2 & \distplot{72}{21}{0}{45} & 138 \\ 
+10=>2 & 10=>1 & \distplot{40}{37}{1}{58} & 136 \\ 
+10=>3 & 10=>2 & \distplotlegend{150}{36}{2}{82} & 270 \\ 
+\bottomrule
+\end{tabular}
+\end{document}

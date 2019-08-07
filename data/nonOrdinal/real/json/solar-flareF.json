@@ -1,0 +1,163 @@
+[
+    {
+        "name": "largest_spot_size",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "A",
+            "H",
+            "K",
+            "R",
+            "S",
+            "X"
+        ]
+    },
+    {
+        "name": "spot_distribution",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "C",
+            "I",
+            "O",
+            "X"
+        ]
+    },
+    {
+        "name": "Activity",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "Evolution",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "name": "Previous_24_hour_flare_activity_code",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "name": "Historically_complex",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "Did_region_become_historically_complex",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "Area",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "Area_of_the_largest_spot",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1"
+        ]
+    },
+    {
+        "name": "C_class_flares_production_by_this_region",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8"
+        ]
+    },
+    {
+        "name": "M_class_flares_production_by_this_region",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "name": "X_class_flares_production_by_this_region",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "0",
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "class",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "F",
+            "rest"
+        ]
+    }
+]

@@ -1,0 +1,108 @@
+[
+    {
+        "name": "menopause",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "lt40",
+            "ge40",
+            "premeno"
+        ]
+    },
+    {
+        "name": "tumor_size",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "0_4",
+            "5_9_55_59",
+            "10_14_50_54",
+            "15_19_45_49",
+            "20_24_40_44",
+            "25_29_35_39",
+            "30_34"
+        ]
+    },
+    {
+        "name": "inv_nodes",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "0_2",
+            "3_5",
+            "6_8",
+            "9_11",
+            "12_14",
+            "15_17",
+            "18_20",
+            "21_23",
+            "24_26",
+            "27_29",
+            "30_32",
+            "33_35",
+            "36_39"
+        ]
+    },
+    {
+        "name": "node_caps",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "no",
+            "yes"
+        ]
+    },
+    {
+        "name": "deg_malig",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "name": "breast",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "cost",
+        "type": "condition",
+        "domain": [
+            "left",
+            "right"
+        ]
+    },
+    {
+        "name": "irradiat",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "no",
+            "yes"
+        ]
+    },
+    {
+        "name": "Class",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "no_recurrence_events",
+            "recurrence_events"
+        ]
+    }
+]

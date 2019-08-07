@@ -1,0 +1,234 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+
+\newcommand{\distplot}[4]{
+\begin{tikzpicture}
+\begin{axis}[
+height = 70,
+width = 0.8\textwidth,
+xbar stacked,
+axis y line = none,
+axis x line = none,
+xmin = 0,
+nodes near coords,
+every node near coord/.append style={yshift=10pt},
+]
+\addplot coordinates {(#1,0)};
+\addplot coordinates {(#2,0)};
+\addplot coordinates {(#3,0)};
+\addplot coordinates {(#4,0)};
+\end{axis}
+\end{tikzpicture}
+}
+
+\newcommand{\distplotlegend}[4]{
+\begin{tikzpicture}
+\begin{axis}[
+height = 70,
+width = 0.8\textwidth,
+xbar stacked,
+axis y line = none,
+axis x line = none,
+xmin = 0,
+nodes near coords,
+every node near coord/.append style={yshift=10pt},
+legend style={at={(0.5,-0.1)},anchor=north,draw=none,column sep=1ex,},
+legend columns=-1
+]
+\addplot coordinates {(#1,0)};
+\addplot coordinates {(#2,0)};
+\addplot coordinates {(#3,0)};
+\addplot coordinates {(#4,0)};
+\addlegendentry{Safe};
+\addlegendentry{Borderline};
+\addlegendentry{Rare};
+\addlegendentry{Outlier};
+\end{axis}
+\end{tikzpicture}
+}
+\begin{document}
+balance\_scale
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+4=>B & 4=>L & \distplot{0}{0}{0}{49} & 49 \\ 
+4=>B & 4=>R & \distplot{0}{0}{0}{49} & 49 \\ 
+4=>L & 4=>B & \distplot{236}{52}{0}{0} & 288 \\ 
+4=>R & 4=>B & \distplotlegend{236}{52}{0}{0} & 288 \\ 
+\bottomrule
+\end{tabular}
+breast-cancer\_nm
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+7=>recurrence\_events & 7=>no\_recurrence\_events & \distplotlegend{30}{34}{66}{40} & 170 \\ 
+\bottomrule
+\end{tabular}
+breast-w
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+9=>malignant & 9=>benign & \distplotlegend{326}{26}{2}{128} & 482 \\ 
+\bottomrule
+\end{tabular}
+breast-w\_nm
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+9=>malignant & 9=>benign & \distplotlegend{322}{22}{2}{136} & 482 \\ 
+\bottomrule
+\end{tabular}
+car
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+6=>acc & 6=>unacc & \distplot{491}{48}{0}{121} & 660 \\ 
+6=>good & 6=>acc & \distplot{81}{18}{0}{48} & 147 \\ 
+6=>vgood & 6=>good & \distplotlegend{72}{18}{0}{0} & 90 \\ 
+\bottomrule
+\end{tabular}
+cpu
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+6=>0 & 6=>1 & \distplot{72}{16}{0}{12} & 100 \\ 
+6=>1 & 6=>2 & \distplot{39}{3}{0}{11} & 53 \\ 
+6=>2 & 6=>1 & \distplot{34}{8}{2}{9} & 53 \\ 
+6=>2 & 6=>3 & \distplot{38}{6}{0}{9} & 53 \\ 
+6=>3 & 6=>2 & \distplotlegend{30}{12}{3}{8} & 53 \\ 
+\bottomrule
+\end{tabular}
+dataset1\_noid
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+16=>2 & 16=>1 & \distplotlegend{116}{56}{198}{66} & 436 \\ 
+\bottomrule
+\end{tabular}
+dataset3
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+11=>1 & 11=>2 & \distplot{214}{138}{30}{104} & 486 \\ 
+11=>2 & 11=>3 & \distplot{152}{68}{4}{72} & 296 \\ 
+11=>3 & 11=>2 & \distplot{221}{34}{3}{99} & 357 \\ 
+11=>3 & 11=>4 & \distplot{192}{62}{4}{99} & 357 \\ 
+11=>4 & 11=>3 & \distplot{189}{35}{4}{80} & 308 \\ 
+11=>5 & 11=>4 & \distplotlegend{50}{86}{40}{72} & 248 \\ 
+\bottomrule
+\end{tabular}
+denbosch
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+8=>1 & 8=>0 & \distplotlegend{74}{20}{2}{22} & 118 \\ 
+\bottomrule
+\end{tabular}
+ERA\_n
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+4=>1 & 4=>2 & \distplot{0}{0}{0}{184} & 184 \\ 
+4=>2 & 4=>3 & \distplot{0}{0}{0}{142} & 142 \\ 
+4=>3 & 4=>2 & \distplot{0}{0}{0}{181} & 181 \\ 
+4=>3 & 4=>4 & \distplot{0}{0}{0}{181} & 181 \\ 
+4=>4 & 4=>3 & \distplot{0}{0}{0}{172} & 172 \\ 
+4=>4 & 4=>5 & \distplot{0}{0}{0}{172} & 172 \\ 
+4=>5 & 4=>4 & \distplot{0}{0}{0}{158} & 158 \\ 
+4=>5 & 4=>6 & \distplot{0}{0}{0}{158} & 158 \\ 
+4=>6 & 4=>5 & \distplot{0}{0}{0}{118} & 118 \\ 
+4=>6 & 4=>7 & \distplot{0}{0}{0}{118} & 118 \\ 
+4=>7 & 4=>6 & \distplot{0}{0}{0}{88} & 88 \\ 
+4=>8 & 4=>7 & \distplot{0}{0}{0}{80} & 80 \\ 
+4=>9 & 4=>8 & \distplotlegend{0}{0}{0}{36} & 36 \\ 
+\bottomrule
+\end{tabular}
+ESL\_n
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+4=>1 & 4=>2 & \distplot{0}{0}{0}{4} & 4 \\ 
+4=>2 & 4=>3 & \distplot{10}{3}{0}{13} & 26 \\ 
+4=>3 & 4=>4 & \distplot{25}{14}{11}{40} & 90 \\ 
+4=>4 & 4=>5 & \distplot{49}{7}{5}{39} & 100 \\ 
+4=>5 & 4=>4 & \distplot{76}{11}{2}{27} & 116 \\ 
+4=>5 & 4=>6 & \distplot{69}{17}{3}{27} & 116 \\ 
+4=>6 & 4=>5 & \distplot{79}{23}{0}{33} & 135 \\ 
+4=>7 & 4=>6 & \distplot{78}{0}{8}{61} & 147 \\ 
+4=>8 & 4=>7 & \distplot{5}{10}{0}{27} & 42 \\ 
+4=>9 & 4=>8 & \distplotlegend{0}{0}{0}{8} & 8 \\ 
+\bottomrule
+\end{tabular}
+housing
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+13=>1 & 13=>2 & \distplot{68}{24}{1}{34} & 127 \\ 
+13=>2 & 13=>1 & \distplot{80}{16}{2}{26} & 124 \\ 
+13=>2 & 13=>3 & \distplot{57}{39}{2}{26} & 124 \\ 
+13=>3 & 13=>2 & \distplot{45}{45}{5}{36} & 131 \\ 
+13=>4 & 13=>3 & \distplotlegend{158}{30}{10}{50} & 248 \\ 
+\bottomrule
+\end{tabular}
+LEV\_n
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+4=>0 & 4=>1 & \distplot{0}{0}{0}{186} & 186 \\ 
+4=>1 & 4=>2 & \distplot{314}{215}{68}{56} & 653 \\ 
+4=>3 & 4=>2 & \distplot{0}{0}{0}{421} & 421 \\ 
+4=>4 & 4=>3 & \distplotlegend{0}{0}{0}{54} & 54 \\ 
+\bottomrule
+\end{tabular}
+SWD\_n
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+10=>2 & 10=>3 & \distplot{10}{16}{20}{18} & 64 \\ 
+10=>3 & 10=>4 & \distplot{326}{252}{102}{56} & 736 \\ 
+10=>5 & 10=>4 & \distplotlegend{112}{212}{76}{34} & 434 \\ 
+\bottomrule
+\end{tabular}
+windsor
+
+\begin{tabular}{lllr}
+\toprule
+Class & Union &  & Total \\ 
+\midrule
+10=>0 & 10=>1 & \distplot{82}{106}{0}{86} & 274 \\ 
+10=>1 & 10=>2 & \distplot{50}{42}{1}{45} & 138 \\ 
+10=>2 & 10=>1 & \distplot{30}{38}{9}{59} & 136 \\ 
+10=>3 & 10=>2 & \distplotlegend{122}{50}{16}{82} & 270 \\ 
+\bottomrule
+\end{tabular}
+\end{document}

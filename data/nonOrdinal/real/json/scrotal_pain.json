@@ -1,0 +1,166 @@
+[
+    {
+        "name": "Age:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "lt11y",
+            "ge11y"
+        ]
+    },
+    {
+        "name": "PainOnset:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "acute",
+            "gradual"
+        ]
+    },
+    {
+        "name": "PainSite:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "left",
+            "right",
+            "both"
+        ]
+    },
+    {
+        "name": "PainType:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "intermittent",
+            "constant"
+        ]
+    },
+    {
+        "name": "Vomiting:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "yes",
+            "no"
+        ]
+    },
+    {
+        "name": "Swelling:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "left",
+            "right",
+            "both",
+            "none"
+        ]
+    },
+    {
+        "name": "Tender:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "upper_pole",
+            "posterior",
+            "entire_testis",
+            "tender_not_specific",
+            "not_tender"
+        ]
+    },
+    {
+        "name": "Cord:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "normal",
+            "abnormal"
+        ]
+    },
+    {
+        "name": "Lie:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "normal",
+            "transverse",
+            "elevated",
+            "transverse_elevated"
+        ]
+    },
+    {
+        "name": "Reflex:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "present",
+            "absent"
+        ]
+    },
+    {
+        "name": "WBCC:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "le4",
+            "gt4_lt12",
+            "ge12"
+        ]
+    },
+    {
+        "name": "Tempr:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "lt37",
+            "ge37_le39",
+            "gt39"
+        ]
+    },
+    {
+        "name": "WBCS:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "normal",
+            "abnormal"
+        ]
+    },
+    {
+        "name": "Triage:",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "positive",
+            "negative"
+        ]
+    }
+]

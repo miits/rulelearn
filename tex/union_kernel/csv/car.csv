@@ -1,0 +1,4 @@
+min_union maj_union safe borderline rare outlier total
+6=>acc 6=>unacc 253 24 0 101 378
+6=>good 6=>acc 45 9 0 42 96
+6=>vgood 6=>good 36 9 0 0 45

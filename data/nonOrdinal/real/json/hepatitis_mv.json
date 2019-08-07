@@ -1,0 +1,198 @@
+[
+    {
+        "name": "AGE",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "SEX",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "STEROID",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "ANTIVIRALS",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "FATIGUE",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "MALAISE",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "ANOREXIA",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "LIVER_BIG",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "LIVER_FIRM",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "SPLEEN_PALPABLE",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "SPIDERS",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "ASCITES",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "VARICES",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "BILIRUBIN",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "ALK_PHOSPHATE",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "SGOT",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "ALBUMIN",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "PROTIME",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "HISTOLOGY",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2"
+        ]
+    },
+    {
+        "name": "Class",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "1",
+            "2"
+        ]
+    }
+]

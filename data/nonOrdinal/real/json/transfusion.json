@@ -1,0 +1,41 @@
+[
+    {
+        "name": "Recency",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "Frequency",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "Monetary",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "Time",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "Donated",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "1",
+            "0"
+        ]
+    }
+]

@@ -1,0 +1,139 @@
+[
+    {
+        "name": "COMPACTNESS",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "CIRCULARITY",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "DISTANCE_CIRCULARITY",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "RADIUS_RATIO",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "PR_AXIS_ASPECT_RATIO",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "MAX_LENGTH_ASPECT_RATIO",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "SCATTER_RATIO",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "ELONGATEDNESS",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "PR_AXIS_RECTANGULARITY",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "MAX_LENGTH_RECTANGULARITY",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "SCALED_VARIANCE_MAJOR",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "SCALED_VARIANCE_MINOR",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "SCALED_RADIUS_OF_GYRATION",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "SKEWNESS_ABOUT_MAJOR",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "SKEWNESS_ABOUT_MINOR",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "KURTOSIS_ABOUT_MAJOR",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "KURTOSIS_ABOUT_MINOR",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "HOLLOWS_RATIO",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "Class",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "van",
+            "rest"
+        ]
+    }
+]

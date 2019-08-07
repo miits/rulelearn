@@ -1,0 +1,62 @@
+[
+    {
+        "name": "mcg",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "gvh",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "lip",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "chg",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "aac",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "alm1",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "alm2",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "localization_site",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "imU",
+            "other"
+        ]
+    }
+]

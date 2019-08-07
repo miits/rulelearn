@@ -1,0 +1,34 @@
+[
+    {
+        "name": "A1",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "A2",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "A3",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "CLASS",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "MIN",
+            "MAJ"
+        ]
+    }
+]

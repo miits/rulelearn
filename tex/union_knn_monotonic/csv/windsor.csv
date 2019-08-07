@@ -1,0 +1,4 @@
+min_union maj_union safe borderline rare outlier total
+10=>0 10=>1 15 80 29 13 137
+10=>2 10=>1 25 158 57 31 271
+10=>3 10=>2 25 77 22 11 135

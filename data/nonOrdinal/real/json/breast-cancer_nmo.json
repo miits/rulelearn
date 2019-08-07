@@ -1,0 +1,145 @@
+[
+    {
+        "name": "A1",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5",
+            "V6",
+            "V7",
+            "V8",
+            "V9"
+        ]
+    },
+    {
+        "name": "A2",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2",
+            "V3"
+        ]
+    },
+    {
+        "name": "A3",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5",
+            "V6",
+            "V7",
+            "V8",
+            "V9",
+            "V10",
+            "V11",
+            "V12"
+        ]
+    },
+    {
+        "name": "A4",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5",
+            "V6",
+            "V7",
+            "V8",
+            "V9",
+            "V10",
+            "V11",
+            "V12",
+            "V13"
+        ]
+    },
+    {
+        "name": "A5",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2"
+        ]
+    },
+    {
+        "name": "A6",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2",
+            "V3"
+        ]
+    },
+    {
+        "name": "A7",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2"
+        ]
+    },
+    {
+        "name": "A8",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5"
+        ]
+    },
+    {
+        "name": "A9",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "V1",
+            "V2"
+        ]
+    },
+    {
+        "name": "A10",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "V1",
+            "V2"
+        ]
+    }
+]

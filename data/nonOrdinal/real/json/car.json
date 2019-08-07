@@ -1,0 +1,88 @@
+[
+    {
+        "name": "buying",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "vhigh",
+            "high",
+            "med",
+            "low"
+        ]
+    },
+    {
+        "name": "maint",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "vhigh",
+            "high",
+            "med",
+            "low"
+        ]
+    },
+    {
+        "name": "doors",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "2",
+            "3",
+            "4",
+            "5more"
+        ]
+    },
+    {
+        "name": "persons",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "2",
+            "4",
+            "more"
+        ]
+    },
+    {
+        "name": "lug_boot",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "small",
+            "med",
+            "big"
+        ]
+    },
+    {
+        "name": "safety",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "low",
+            "med",
+            "high"
+        ]
+    },
+    {
+        "name": "class",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "good",
+            "rest"
+        ]
+    }
+]

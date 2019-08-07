@@ -1,0 +1,234 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{csvsimple}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+
+\title{Types of Examples - Monotonic}
+
+\begin{document}
+
+\newcolumntype{H}{S[round-mode=places,round-precision=2]}
+
+\section{Monotonicity introduction}
+
+\subsection{Union vs. union, KNN}
+
+\begin{table}[H]
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/union_vs_union_knn.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Union vs. union - KNN}
+\label{tab:union_knn}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/union_vs_union_knn_monotonic.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Union vs. union - KNN - Monotonic}
+\label{tab:union_knn_monotonic}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/union_knn_diffs.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Differences}
+\label{tab:union_knn_diffs}
+\end{minipage}
+\end{table}
+
+\subsection{Union vs. union, Kernel}
+
+\begin{table}[H]
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/union_vs_union_kernel.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Union vs. union - Kernel}
+\label{tab:union_kernel}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/union_vs_union_kernel_monotonic.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Union vs. union - Kernel - Monotonic}
+\label{tab:union_kernel_monotonic}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/union_kernel_diffs.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Differences}
+\label{tab:union_kernel_diffs}
+\end{minipage}
+\end{table}
+
+\subsection{Class vs. union, KNN}
+
+\begin{table}[H]
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/class_vs_union_knn.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Class vs. union - KNN}
+\label{tab:class_knn}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/class_vs_union_knn_monotonic.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Class vs. union - KNN - Monotonic}
+\label{tab:class_knn_monotonic}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/class_knn_diffs.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Differences}
+\label{tab:class_knn_diffs}
+\end{minipage}
+\end{table}
+
+\subsection{Class vs. union, Kernel}
+
+\begin{table}[H]
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/class_vs_union_kernel.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Class vs. union - Kernel}
+\label{tab:class_kernel}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/class_vs_union_kernel_monotonic.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Class vs. union - Kernel - Monotonic}
+\label{tab:class_kernel_monotonic}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\centering
+\csvreader[
+    separator=semicolon,
+    tabular=lHHHH,
+    respect underscore,
+    head to column names,
+    separator=semicolon,
+    table head=\toprule Dataset & S\% & B\% & R\% & O\% \\ \midrule,
+    table foot=\bottomrule
+]{../../results/percentage/ordinal/class_kernel_diffs.csv}
+{}
+{\texttt{\name} & \safe & \borderline & \rare & \outlier}
+\caption{Differences}
+\label{tab:union_kernel_diffs}
+\end{minipage}
+\end{table}
+
+\end{document}

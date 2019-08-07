@@ -1,0 +1,112 @@
+[
+    {
+        "name": "Wifes_age",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "Wifes_education",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "name": "Husbands_education",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "name": "Number_of_children_ever_born",
+        "active": true,
+        "valueType": "real",
+        "preferenceType": "gain",
+        "type": "condition"
+    },
+    {
+        "name": "Wifes_religion",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "0",
+            "1"
+        ]
+    },
+    {
+        "name": "Wifes_now_working",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "0",
+            "1"
+        ]
+    },
+    {
+        "name": "Husbands_occupation",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "name": "Standard_of_living_index",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ]
+    },
+    {
+        "name": "Media_exposure",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "condition",
+        "domain": [
+            "0",
+            "1"
+        ]
+    },
+    {
+        "name": "Contraceptive_method_used",
+        "active": true,
+        "valueType": "enumeration",
+        "preferenceType": "gain",
+        "type": "decision",
+        "domain": [
+            "2",
+            "1"
+        ]
+    }
+]
