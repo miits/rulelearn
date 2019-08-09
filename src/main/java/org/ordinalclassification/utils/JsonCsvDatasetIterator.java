@@ -28,7 +28,7 @@ public class JsonCsvDatasetIterator {
             File json = jsonIterator.next();
             File csv = csvIterator.next();
             String datasetName = FilenameUtils.removeExtension(json.getName());
-            String resultsPath = String.format("%s\\%s", this.resultsPath, datasetName);
+            String resultsPath = String.format("%s%s%s", this.resultsPath, File.separator, datasetName);
             String[] paths = {json.getPath(), csv.getPath(), resultsPath};
             System.out.println(String.format("[JsonCsvDatasetIterator] Processing dataset: %s (%d/%d)", datasetName, ++counter, datasetsCount));
             operation.carryOut(paths);

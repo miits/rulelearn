@@ -12,6 +12,7 @@ import org.ordinalclassification.types.LearningExampleType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -220,10 +221,10 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
     }
 
     private void saveResults() throws IOException {
+        createDirIfNotExists();
         for (Map.Entry<String, AnalysisResult> entry: resultsByName.entrySet()) {
             AnalysisResult result = entry.getValue();
-            String filename = String.format("%s\\%s.csv", resultsPath, entry.getKey());
-            createDirIfNotExists();
+            String filename = String.format("%s%s%s.csv", resultsPath, File.separator, entry.getKey());
             result.saveCsv(filename);
         }
     }
