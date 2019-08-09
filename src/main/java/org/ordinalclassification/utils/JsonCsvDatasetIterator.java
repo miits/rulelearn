@@ -20,8 +20,8 @@ public class JsonCsvDatasetIterator {
     public void iterate(DatasetOperation operation) {
         File[] jsonFiles = getFiles(this.jsonPath);
         File[] csvFiles = getFiles(this.csvPath);
-        Iterator<File> jsonIterator = Arrays.stream(jsonFiles).iterator();
-        Iterator<File> csvIterator = Arrays.stream(csvFiles).iterator();
+        Iterator<File> jsonIterator = Arrays.stream(jsonFiles).sorted().iterator();
+        Iterator<File> csvIterator = Arrays.stream(csvFiles).sorted().iterator();
         int datasetsCount = jsonFiles.length;
         int counter = 0;
         while (jsonIterator.hasNext() && csvIterator.hasNext()) {
