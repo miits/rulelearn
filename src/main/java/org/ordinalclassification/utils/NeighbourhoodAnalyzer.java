@@ -181,42 +181,38 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
     }
 
     private void classVsUnionAnalysis(HashMap<Decision, int[]> classesByDecision, Union[] atLeastUnions, Union[] atMostUnions) {
-        Iterator<Union> atLeastUnionIterator = Arrays.stream(atLeastUnions).iterator();
-        Iterator<Union> atMostUnionIterator = Arrays.stream(atMostUnions).iterator();
         resultsByName.put(classVsUnionKNNFilename, new AnalysisResult());
         resultsByName.put(classVsUnionKernelFilename, new AnalysisResult());
         resultsByName.put(classVsUnionKNNMonotonicFilename, new AnalysisResult());
         resultsByName.put(classVsUnionKernelMonotonicFilename, new AnalysisResult());
-        UnionWithSingleLimitingDecision atLeastUnion = (UnionWithSingleLimitingDecision) atLeastUnionIterator.next();
-        Decision classDecision = atLeastUnion.getLimitingDecision();
-        boolean loop = false;
-        if (atLeastUnionIterator.hasNext()) {
-            atLeastUnion = (UnionWithSingleLimitingDecision) atLeastUnionIterator.next();
-            loop = true;
-        }
-        UnionWithSingleLimitingDecision atMostUnion = (UnionWithSingleLimitingDecision) atMostUnionIterator.next();
-        while (loop) {
-            int[] atLeast = unionToArray(atLeastUnion);
-            int[] classObjects = classesByDecision.get(classDecision);
-            performKNearestAnalysis(atLeast, classObjects, atLeastUnion.getLimitingDecision(), classDecision, classVsUnionKNNFilename);
-            performKernelAnalysis(atLeast, classObjects, atLeastUnion.getLimitingDecision(), classDecision, classVsUnionKernelFilename);
-            performKNearestMonotonicAnalysis(atLeast, classObjects, atLeastUnion.getLimitingDecision(), classDecision, classVsUnionKNNMonotonicFilename);
-            performKernelMonotonicAnalysis(atLeast, classObjects, atLeastUnion.getLimitingDecision(), classDecision, classVsUnionKernelMonotonicFilename);
-            int[] atMost = unionToArray(atMostUnion);
-            performKNearestAnalysis(atMost, classObjects, atMostUnion.getLimitingDecision(), classDecision, classVsUnionKNNFilename);
-            performKernelAnalysis(atMost, classObjects, atMostUnion.getLimitingDecision(), classDecision, classVsUnionKernelFilename);
-            performKNearestMonotonicAnalysis(atMost, classObjects, atMostUnion.getLimitingDecision(), classDecision, classVsUnionKNNMonotonicFilename);
-            performKernelMonotonicAnalysis(atMost, classObjects, atMostUnion.getLimitingDecision(), classDecision, classVsUnionKernelMonotonicFilename);
-            if (atLeastUnionIterator.hasNext()) {
-                classDecision = atLeastUnion.getLimitingDecision();
-                atLeastUnion = (UnionWithSingleLimitingDecision) atLeastUnionIterator.next();
+        for (int i = 0; i < classesByDecision.size(); i++) {
+            if (i == 0) {
+                Decision classDecision = ((UnionWithSingleLimitingDecision) atMostUnions[i]).getLimitingDecision();
+                int[] classIndices = classesByDecision.get(classDecision);
+                performClassVsUnion(classIndices, classDecision, (UnionWithSingleLimitingDecision) atLeastUnions[i]);
+            } else if (i == classesByDecision.size() - 1){
+                Decision classDecision = ((UnionWithSingleLimitingDecision) atLeastUnions[i - 1]).getLimitingDecision();
+                int[] classIndices = classesByDecision.get(classDecision);
+                performClassVsUnion(classIndices, classDecision, (UnionWithSingleLimitingDecision) atMostUnions[i - 1]);
             } else {
-                loop = false;
-            }
-            if (atMostUnionIterator.hasNext()) {
-                atMostUnion = (UnionWithSingleLimitingDecision) atMostUnionIterator.next();
+                Decision classDecision = ((UnionWithSingleLimitingDecision) atLeastUnions[i - 1]).getLimitingDecision();
+                int[] classIndices = classesByDecision.get(classDecision);
+                performClassVsUnion(classIndices, classDecision, (UnionWithSingleLimitingDecision) atMostUnions[i - 1]);
+                performClassVsUnion(classIndices, classDecision, (UnionWithSingleLimitingDecision) atLeastUnions[i]);
             }
         }
+    }
+
+    private void performClassVsUnion(int[] classIndices, Decision classDecision, UnionWithSingleLimitingDecision union) {
+        int[] unionIndices = unionToArray(union);
+        int[] majority = classIndices.length > unionIndices.length ? classIndices : unionIndices;
+        int[] minority = classIndices.length <= unionIndices.length ? classIndices : unionIndices;
+        Decision majDecision = classIndices.length > unionIndices.length ? classDecision : union.getLimitingDecision();
+        Decision minDecision = classIndices.length <= unionIndices.length ? classDecision : union.getLimitingDecision();
+        performKNearestAnalysis(majority, minority, majDecision, minDecision, classVsUnionKNNFilename);
+        performKernelAnalysis(majority, minority, majDecision, minDecision, classVsUnionKernelFilename);
+        performKNearestMonotonicAnalysis(majority, minority, majDecision, minDecision, classVsUnionKNNMonotonicFilename);
+        performKernelMonotonicAnalysis(majority, minority, majDecision, minDecision, classVsUnionKernelMonotonicFilename);
     }
 
     private void saveResults() throws IOException {
