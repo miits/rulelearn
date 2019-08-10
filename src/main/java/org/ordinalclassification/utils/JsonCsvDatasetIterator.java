@@ -20,15 +20,15 @@ public class JsonCsvDatasetIterator {
     public void iterate(DatasetOperation operation) {
         File[] jsonFiles = getFiles(this.jsonPath);
         File[] csvFiles = getFiles(this.csvPath);
-        Iterator<File> jsonIterator = Arrays.stream(jsonFiles).iterator();
-        Iterator<File> csvIterator = Arrays.stream(csvFiles).iterator();
+        Iterator<File> jsonIterator = Arrays.stream(jsonFiles).sorted().iterator();
+        Iterator<File> csvIterator = Arrays.stream(csvFiles).sorted().iterator();
         int datasetsCount = jsonFiles.length;
         int counter = 0;
         while (jsonIterator.hasNext() && csvIterator.hasNext()) {
             File json = jsonIterator.next();
             File csv = csvIterator.next();
             String datasetName = FilenameUtils.removeExtension(json.getName());
-            String resultsPath = String.format("%s\\%s", this.resultsPath, datasetName);
+            String resultsPath = String.format("%s%s%s", this.resultsPath, File.separator, datasetName);
             String[] paths = {json.getPath(), csv.getPath(), resultsPath};
             System.out.println(String.format("[JsonCsvDatasetIterator] Processing dataset: %s (%d/%d)", datasetName, ++counter, datasetsCount));
             operation.carryOut(paths);

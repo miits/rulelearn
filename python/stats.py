@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import csv
+import pathlib
 from argparse import ArgumentParser
 
 
@@ -15,6 +16,8 @@ def count(path_to_file, dataset_name):
 
 
 def save_csv(data, fieldnames, csv_file_path):
+    path = pathlib.Path(csv_file_path)
+    path.parents[0].mkdir(parents=True, exist_ok=True)
     with open(csv_file_path, 'w', newline='') as file:
         writer = csv.DictWriter(file, delimiter=';', fieldnames=fieldnames)
         writer.writeheader()

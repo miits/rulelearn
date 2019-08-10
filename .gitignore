@@ -7,3 +7,5 @@ lib
 .project
 *generated.json
 *generated.csv
+data
+results
