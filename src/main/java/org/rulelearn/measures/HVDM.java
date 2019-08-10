@@ -7,14 +7,14 @@ import org.ordinalclassification.utils.*;
 
 import java.util.HashMap;
 
-public class HVDM implements Measure {
-    private InformationTableWithDecisionDistributions data;
-    private int numberOfAttributes;
+public class HVDM implements DistanceMeasure {
     private boolean[] attributeIsNominal;
     private int[] nominalAttributeValuesNumber;
-    private double[][] values;
-    private boolean[][] missingValues;
     private HashMap<Integer, AttributeStats> valueStatsByAttributeIndex;
+    protected InformationTableWithDecisionDistributions data;
+    protected int numberOfAttributes;
+    protected double[][] values;
+    protected boolean[][] missingValues;
 
     public HVDM(InformationTableWithDecisionDistributions data) {
         this.data = data;
@@ -22,6 +22,24 @@ public class HVDM implements Measure {
         initNominalAttributesMarking();
         initValues();
         initStats();
+    }
+
+    @Override
+    public double measureDistance(int xIndex, int yIndex) {
+        double distance = 0;
+        for (int i = 0; i < numberOfAttributes; i++) {
+            distance += Math.pow(getDistance(i, xIndex, yIndex), 2.0);
+        }
+        return Math.sqrt(distance);
+    }
+
+    public InformationTableWithDecisionDistributions getData() {
+        return data;
+    }
+
+    @Override
+    public MeasureType getType() {
+        return MeasureType.COST;
     }
 
     private void initNominalAttributesMarking() {
@@ -63,14 +81,6 @@ public class HVDM implements Measure {
         }
     }
 
-    public double measureDistance(int xIndex, int yIndex) {
-        double distance = 0;
-        for (int i = 0; i < numberOfAttributes; i++) {
-            distance += Math.pow(getDistance(i, xIndex, yIndex), 2.0);
-        }
-        return Math.sqrt(distance);
-    }
-
     private double getDistance(int attributeIndex, int xIndex, int yIndex) {
         if (missingValues[xIndex][attributeIndex] || missingValues[yIndex][attributeIndex]) {
             return 1.0;
@@ -104,14 +114,5 @@ public class HVDM implements Measure {
         double diff = Math.abs(values[xIndex][attributeIndex] - values[yIndex][attributeIndex]);
         double normalization = 4.0 * attributeStats.getStdDev();
         return diff / normalization;
-    }
-
-    public InformationTableWithDecisionDistributions getData() {
-        return data;
-    }
-
-    @Override
-    public MeasureType getType() {
-        return MeasureType.COST;
     }
 }

@@ -1,17 +1,16 @@
 package org.rulelearn.measures;
 
 import org.rulelearn.data.*;
-import org.rulelearn.types.*;
 import org.ordinalclassification.types.FieldValueWrapper;
 import org.ordinalclassification.utils.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 
-public class RankHVDM implements Measure {
+public class RankHVDM implements DistanceMeasure {
     private InformationTableWithDecisionDistributions data;
     private int numberOfAttributes;
-    private boolean[] attributeIsNominal;
-    private int[] nominalAttributeValuesNumber;
     private double[][] values;
     private boolean[][] missingValues;
     private AttributePreferenceType[] types;
@@ -20,25 +19,41 @@ public class RankHVDM implements Measure {
     public RankHVDM(InformationTableWithDecisionDistributions data) {
         this.data = data;
         this.numberOfAttributes = data.getActiveConditionAttributeFields().getNumberOfAttributes();
-        initNominalAttributesMarking();
-        initPreferenceTypes();
         initValues();
+        initPreferenceTypes();
         initRanks();
     }
 
-    private void initNominalAttributesMarking() {
-        this.attributeIsNominal = new boolean[numberOfAttributes];
-        this.nominalAttributeValuesNumber = new int[numberOfAttributes];
+    @Override
+    public double measureDistance(int xIndex, int yIndex) {
+        double distance = 0;
         for (int i = 0; i < numberOfAttributes; i++) {
-            Attribute attribute = data.getActiveConditionAttributeFields().getAttributes()[i];
-            Field field = attribute.getValueType();
-            if (field instanceof EnumerationField) {
-                attributeIsNominal[i] = true;
-                nominalAttributeValuesNumber[i] = ((EnumerationField) field).getElementList().getSize();
-            } else {
-                attributeIsNominal[i] = false;
-            }
+            distance += Math.pow(getDistance(i, xIndex, yIndex), 2.0);
         }
+        return Math.sqrt(distance);
+    }
+
+    public InformationTableWithDecisionDistributions getData() {
+        return data;
+    }
+
+    @Override
+    public MeasureType getType() {
+        return MeasureType.COST;
+    }
+
+    private double getDistance(int attributeIndex, int xIndex, int yIndex) {
+        if (missingValues[xIndex][attributeIndex] || missingValues[yIndex][attributeIndex]) {
+            return 1.0;
+        }
+        return rankDistance(attributeIndex, xIndex, yIndex);
+    }
+
+    private double rankDistance(int attributeIndex, int xIndex, int yIndex) {
+        HashMap<Double, Double> ranksForAttribute = ranks[attributeIndex];
+        Double xRank = ranksForAttribute.get(values[xIndex][attributeIndex]);
+        Double yRank = ranksForAttribute.get(values[yIndex][attributeIndex]);
+        return Math.abs(xRank - yRank);
     }
 
     private void initValues() {
@@ -112,58 +127,30 @@ public class RankHVDM implements Measure {
         return ranksForAttribute;
     }
 
-    public static HashMap<Double, Double> getAverageRanks(double[] rankValues) {
+    private HashMap<Double, Double> getAverageRanks(double[] rankValues) {
         HashMap<Double, Double> avgRanksByValue = new HashMap<>();
         double previous = Double.NaN;
         double sum = 0.0;
-        int count = 1;
+        int count = 0;
         for (int i = 0; i < rankValues.length; i++) {
             if (rankValues[i] == previous) {
                 sum += i;
                 count++;
-                if (i == rankValues.length - 1) {
-                    double avgRank = sum / count;
-                    avgRanksByValue.put(rankValues[i], avgRank);
-                }
             } else {
                 if (count > 1) {
-                    double avgRank = sum / count;
-                    count = 1;
+                    double avgRank = sum / (double) count;
                     avgRanksByValue.put(rankValues[i - 1], avgRank);
                 }
-                sum = i;
+                sum = (double) i;
+                count = 1;
             }
             previous = rankValues[i];
         }
+        if (count > 1) {
+            double avgRank = sum / (double) count;
+            avgRanksByValue.put(rankValues[rankValues.length - 1], avgRank);
+        }
         return avgRanksByValue;
-    }
-
-    public double measureDistance(int xIndex, int yIndex) {
-        double distance = 0;
-        for (int i = 0; i < numberOfAttributes; i++) {
-            distance += Math.pow(getDistance(i, xIndex, yIndex), 2.0);
-        }
-        return Math.sqrt(distance);
-    }
-
-    private double getDistance(int attributeIndex, int xIndex, int yIndex) {
-        if (missingValues[xIndex][attributeIndex] || missingValues[yIndex][attributeIndex]) {
-            return 1.0;
-        }
-        if (attributeIsNominal[attributeIndex]) {
-            return 1.0;
-        } else {
-            return 1.0;
-        }
-    }
-
-    public InformationTableWithDecisionDistributions getData() {
-        return data;
-    }
-
-    @Override
-    public MeasureType getType() {
-        return MeasureType.COST;
     }
 }
 
