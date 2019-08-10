@@ -1,3 +1,4 @@
+import pathlib
 from argparse import ArgumentParser
 import os
 import pandas as pd
@@ -53,7 +54,10 @@ def main():
         result['totals'].append(total)
         result['distributed'].append(distributed)
     res_df = pd.DataFrame.from_dict(result)
-    res_df.to_csv(os.path.join(args.out, 'count.csv'), sep=';', index=0)
+    path = os.path.join(args.out, 'count.csv')
+    path = pathlib.Path(path)
+    path.parents[0].mkdir(parents=True, exist_ok=True)
+    res_df.to_csv(str(path), sep=';', index=0)
 
 
 if __name__ == "__main__":
