@@ -10,11 +10,15 @@ public class JsonCsvDatasetIterator {
     private String jsonPath;
     private String csvPath;
     private String resultsPath;
+    private int k;
+    private String measure;
 
-    public JsonCsvDatasetIterator(String jsonPath, String csvPath, String resultsPath) {
+    public JsonCsvDatasetIterator(String jsonPath, String csvPath, String resultsPath, int k, String measure) {
         this.jsonPath = jsonPath;
         this.csvPath = csvPath;
         this.resultsPath = resultsPath;
+        this.k = k;
+        this.measure = measure;
     }
 
     public void iterate(DatasetOperation operation) {
@@ -29,9 +33,9 @@ public class JsonCsvDatasetIterator {
             File csv = csvIterator.next();
             String datasetName = FilenameUtils.removeExtension(json.getName());
             String resultsPath = String.format("%s%s%s", this.resultsPath, File.separator, datasetName);
-            String[] paths = {json.getPath(), csv.getPath(), resultsPath};
+            String[] args = {json.getPath(), csv.getPath(), resultsPath, String.valueOf(this.k), this.measure};
             System.out.println(String.format("[JsonCsvDatasetIterator] Processing dataset: %s (%d/%d)", datasetName, ++counter, datasetsCount));
-            operation.carryOut(paths);
+            operation.carryOut(args);
         }
     }
 

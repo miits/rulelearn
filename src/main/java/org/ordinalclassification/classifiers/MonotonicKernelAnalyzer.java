@@ -6,6 +6,7 @@ import org.rulelearn.core.TernaryLogicValue;
 import org.rulelearn.data.Decision;
 import org.rulelearn.data.EvaluationAttribute;
 import org.rulelearn.data.Table;
+import org.rulelearn.measures.DistanceMeasure;
 import org.rulelearn.measures.HVDM;
 import org.rulelearn.types.EvaluationField;
 
@@ -20,7 +21,7 @@ public class MonotonicKernelAnalyzer extends NearestNeighborsAnalyzer {
     private Table<EvaluationAttribute, EvaluationField> evaluations;
     private int numberOfConditionAttributes;
 
-    public MonotonicKernelAnalyzer(HVDM measure, int[] majorityIndices, int[] minorityIndices, Decision majorityLimitingDecision, Decision minorityLimitingDecision, KernelLabeler labeler) {
+    public MonotonicKernelAnalyzer(DistanceMeasure measure, int[] majorityIndices, int[] minorityIndices, Decision majorityLimitingDecision, Decision minorityLimitingDecision, KernelLabeler labeler) {
         super(measure, majorityIndices, minorityIndices);
         this.majorityLimitingDecision = majorityLimitingDecision;
         this.minorityLimitingDecision = minorityLimitingDecision;

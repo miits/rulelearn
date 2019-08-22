@@ -2,6 +2,7 @@ package org.ordinalclassification.classifiers;
 
 import org.ordinalclassification.types.DistanceArray;
 import org.ordinalclassification.types.LearningExampleType;
+import org.rulelearn.measures.DistanceMeasure;
 import org.rulelearn.measures.HVDM;
 
 import java.util.*;
@@ -9,13 +10,13 @@ import java.util.*;
 import static java.util.stream.Collectors.toMap;
 
 public abstract class NearestNeighborsAnalyzer {
-    protected HVDM measure;
+    protected DistanceMeasure measure;
     protected int[] majorityIndices;
     protected int[] minorityIndices;
     protected DistanceArray distances;
     protected HashMap<Integer, LearningExampleType> labelsAssignment;
 
-    public NearestNeighborsAnalyzer(HVDM measure, int[] majorityIndices, int[] minorityIndices) {
+    public NearestNeighborsAnalyzer(DistanceMeasure measure, int[] majorityIndices, int[] minorityIndices) {
         this.measure = measure;
         this.majorityIndices = majorityIndices;
         this.minorityIndices = minorityIndices;

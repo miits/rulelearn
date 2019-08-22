@@ -1,6 +1,7 @@
 package org.ordinalclassification.classifiers;
 
 import org.rulelearn.data.Decision;
+import org.rulelearn.measures.DistanceMeasure;
 import org.rulelearn.measures.HVDM;
 import org.ordinalclassification.types.LearningExampleType;
 import org.ordinalclassification.utils.KNearestLabeler;
@@ -17,7 +18,7 @@ public class KNNAnalyzer extends NearestNeighborsAnalyzer {
     private KNearestLabeler labeler;
     private HashMap<Integer, int[][]> neighbourhoods;
 
-    public KNNAnalyzer(HVDM measure, int[] majorityIndices, int[] minorityIndices, int k, KNearestLabeler labeler) {
+    public KNNAnalyzer(DistanceMeasure measure, int[] majorityIndices, int[] minorityIndices, int k, KNearestLabeler labeler) {
         super(measure, majorityIndices, minorityIndices);
         this.k = k;
         this.labeler = labeler;

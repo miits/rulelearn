@@ -5,9 +5,11 @@ import org.ordinalclassification.classifiers.*;
 import org.rulelearn.approximations.Union;
 import org.rulelearn.approximations.UnionWithSingleLimitingDecision;
 import org.rulelearn.data.*;
+import org.rulelearn.measures.DistanceMeasure;
 import org.rulelearn.measures.HVDM;
 import org.ordinalclassification.types.AnalysisResult;
 import org.ordinalclassification.types.LearningExampleType;
+import org.rulelearn.measures.RankHVDM;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +22,10 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
     private String jsonPath;
     private String csvPath;
     private String resultsPath;
+    private int k;
+    private String measureName;
     private DataSubsetExtractor dataExtractor;
-    private HVDM measure;
+    private DistanceMeasure measure;
     private HashMap<String, AnalysisResult> resultsByName;
     private static String unionVsUnionKernelFilename = "union_vs_union_kernel";
     private static String unionVsUnionKNNFilename = "union_vs_union_knn";
@@ -32,10 +36,12 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
     private static String classVsUnionKernelMonotonicFilename = "class_vs_union_kernel_monotonic";
     private static String classVsUnionKNNMonotonicFilename = "class_vs_union_knn_monotonic";
 
-    public NeighbourhoodAnalyzer(String jsonPath, String csvPath, String resultsPath) {
+    public NeighbourhoodAnalyzer(String jsonPath, String csvPath, String resultsPath, int k, String measureName) {
         this.jsonPath = jsonPath;
         this.csvPath = csvPath;
         this.resultsPath = resultsPath;
+        this.k = k;
+        this.measureName = measureName;
     }
 
     public NeighbourhoodAnalyzer() {
@@ -56,9 +62,11 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
         jsonPath = args[0];
         csvPath = args[1];
         resultsPath = args[2];
+        k = Integer.parseInt(args[3]);
+        measureName = args[4];
     }
 
-    private void checkArgs(String[] args) throws IllegalArgumentException{
+    private void checkArgs(String[] args) throws IllegalArgumentException {
         if (args.length < 3) {
             throw new IllegalArgumentException("Argument missing");
         }
@@ -87,7 +95,11 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
         InformationTableWithDecisionDistributions informationTable = new InformationTableWithDecisionDistributions(
                 InformationTableBuilder.safelyBuildFromCSVFile(jsonPath, csvPath, false));
         dataExtractor = new DataSubsetExtractor(informationTable);
-        measure = new HVDM(dataExtractor.getData());
+        if (this.measureName.equals("RankHVDM")) {
+            measure = new RankHVDM(dataExtractor.getData());
+        } else {
+            measure = new HVDM(dataExtractor.getData());
+        }
         resultsByName = new HashMap<>();
     }
 
@@ -154,15 +166,22 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
     }
 
     private HashMap<Integer, LearningExampleType> kNearestAnalysis(int[] majorityIndices, int[] minorityIndices) {
-        KNearestLabeler labeler = new KNearestLabeler(4, 2, 1);
-        KNNAnalyzer analyzer = new KNNAnalyzer(measure, majorityIndices, minorityIndices, 5, labeler);
+        KNearestLabeler labeler = getKNearesLabeler();
+        KNNAnalyzer analyzer = new KNNAnalyzer(measure, majorityIndices, minorityIndices, this.k, labeler);
         analyzer.labelExamples();
         return analyzer.getLabelsAssignment();
     }
 
+    private KNearestLabeler getKNearesLabeler() {
+        if (this.k == 7) {
+            return new KNearestLabeler(5, 3, 1);
+        }
+        return new KNearestLabeler(4, 2, 1);
+    }
+
     private HashMap<Integer, LearningExampleType> kNearestMonotonicAnalysis(int[] majorityIndices, int[] minorityIndices) {
-        KNearestLabeler labeler = new KNearestLabeler(4, 2, 1);
-        MonotonicKNNAnalyzer analyzer = new MonotonicKNNAnalyzer(measure, majorityIndices, minorityIndices, 5, labeler);
+        KNearestLabeler labeler = getKNearesLabeler();
+        MonotonicKNNAnalyzer analyzer = new MonotonicKNNAnalyzer(measure, majorityIndices, minorityIndices, this.k, labeler);
         analyzer.labelExamples();
         return analyzer.getLabelsAssignment();
     }
@@ -191,7 +210,7 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
                 Decision classDecision = ((UnionWithSingleLimitingDecision) atMostUnions[i]).getLimitingDecision();
                 int[] classIndices = classesByDecision.get(classDecision);
                 performClassVsUnion(classIndices, classDecision, (UnionWithSingleLimitingDecision) atLeastUnions[i]);
-            } else if (i == classesByDecision.size() - 1){
+            } else if (i == classesByDecision.size() - 1) {
                 Decision classDecision = ((UnionWithSingleLimitingDecision) atLeastUnions[i - 1]).getLimitingDecision();
                 int[] classIndices = classesByDecision.get(classDecision);
                 performClassVsUnion(classIndices, classDecision, (UnionWithSingleLimitingDecision) atMostUnions[i - 1]);
@@ -218,7 +237,7 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
 
     private void saveResults() throws IOException {
         createDirIfNotExists();
-        for (Map.Entry<String, AnalysisResult> entry: resultsByName.entrySet()) {
+        for (Map.Entry<String, AnalysisResult> entry : resultsByName.entrySet()) {
             AnalysisResult result = entry.getValue();
             String filename = String.format("%s%s%s.csv", resultsPath, File.separator, entry.getKey());
             result.saveCsv(filename);

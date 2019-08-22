@@ -2,6 +2,7 @@ package org.ordinalclassification.classifiers;
 
 import org.ordinalclassification.types.LearningExampleType;
 import org.rulelearn.data.Decision;
+import org.rulelearn.measures.DistanceMeasure;
 import org.rulelearn.measures.HVDM;
 import org.ordinalclassification.utils.KernelLabeler;
 
@@ -14,7 +15,7 @@ public class KernelAnalyzer extends NearestNeighborsAnalyzer {
     private KernelLabeler labeler;
     private double kernelWidth;
 
-    public KernelAnalyzer(HVDM measure, int[] majorityIndices, int[] minorityIndices, Decision majorityLimitingDecision, Decision minorityLimitingDecision, KernelLabeler labeler) {
+    public KernelAnalyzer(DistanceMeasure measure, int[] majorityIndices, int[] minorityIndices, Decision majorityLimitingDecision, Decision minorityLimitingDecision, KernelLabeler labeler) {
         super(measure, majorityIndices, minorityIndices);
         this.majorityLimitingDecision = majorityLimitingDecision;
         this.minorityLimitingDecision = minorityLimitingDecision;

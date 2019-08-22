@@ -1,15 +1,16 @@
 package org.ordinalclassification.types;
 
+import org.rulelearn.measures.DistanceMeasure;
 import org.rulelearn.measures.HVDM;
 
 import java.util.HashMap;
 
 public class DistanceArray {
     private int examplesCount;
-    private HVDM measure;
+    private DistanceMeasure measure;
     private HashMap<Integer, HashMap<Integer, Double>> distances;
 
-    public DistanceArray(HVDM measure) {
+    public DistanceArray(DistanceMeasure measure) {
         this.examplesCount = measure.getData().getNumberOfObjects();
         this.measure = measure;
         distances = new HashMap<>();

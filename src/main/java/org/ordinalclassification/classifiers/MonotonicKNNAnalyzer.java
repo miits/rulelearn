@@ -3,6 +3,7 @@ package org.ordinalclassification.classifiers;
 import org.ordinalclassification.utils.KNearestLabeler;
 import org.rulelearn.core.TernaryLogicValue;
 import org.rulelearn.data.*;
+import org.rulelearn.measures.DistanceMeasure;
 import org.rulelearn.measures.HVDM;
 import org.rulelearn.types.EvaluationField;
 
@@ -16,7 +17,7 @@ public class MonotonicKNNAnalyzer extends NearestNeighborsAnalyzer {
     private Table<EvaluationAttribute, EvaluationField> evaluations;
     private int numberOfConditionAttributes;
 
-    public MonotonicKNNAnalyzer(HVDM measure, int[] majorityIndices, int[] minorityIndices, int k, KNearestLabeler labeler) {
+    public MonotonicKNNAnalyzer(DistanceMeasure measure, int[] majorityIndices, int[] minorityIndices, int k, KNearestLabeler labeler) {
         super(measure, majorityIndices, minorityIndices);
         this.k = k;
         this.labeler = labeler;
