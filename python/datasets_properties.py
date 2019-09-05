@@ -27,7 +27,7 @@ def get_attr_names(json_dir, filename):
 
 
 def count(df, decision_attr_name):
-    examples_no = df.size
+    examples_no = df.shape[0]
     decision_count = df.groupby([decision_attr_name]).size()
     decision_count = decision_count.to_dict()
     return examples_no, decision_count

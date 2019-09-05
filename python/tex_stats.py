@@ -1,3 +1,4 @@
+import pathlib
 from argparse import ArgumentParser
 import os
 import pandas as pd
@@ -146,6 +147,8 @@ def write_dataframe(df, filepath):
 
 
 def write_file(filepath, lines):
+    path = pathlib.Path(filepath)
+    path.parents[0].mkdir(parents=True, exist_ok=True)
     with open(filepath, mode='w') as file:
         file.writelines(lines)
         file.close()
