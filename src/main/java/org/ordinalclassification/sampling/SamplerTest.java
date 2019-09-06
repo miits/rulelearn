@@ -64,14 +64,14 @@ public class SamplerTest implements DatasetOperation {
 
     private void runSampler() {
         Sampler sampler = new Sampler(informationTable);
-//        sampler.setOnesWeights();
-        double[] weights = ClassBalanceWeightsCalculator.getWeights(informationTable);
-        sampler.setWeights(weights);
-//        int size = informationTable.getNumberOfObjects();
+        sampler.setOnesWeights();
+//        double[] weights = ClassBalanceWeightsCalculator.getWeights(informationTable);
+//        sampler.setWeights(weights);
+        int size = informationTable.getNumberOfObjects();
         DecisionDistribution decisionDistribution = informationTable.getDecisionDistribution();
         int minCount = ClassBalanceWeightsCalculator.getMinCount(decisionDistribution);
         int classesNumber = decisionDistribution.getDecisions().size();
-        int size = minCount * classesNumber;
+//        int size = minCount * classesNumber;
         ArrayList<int[]> results = sampler.getWeightedRandomSamples(10, size);
         resultsByDatasetName.put(datasetName, results);
     }

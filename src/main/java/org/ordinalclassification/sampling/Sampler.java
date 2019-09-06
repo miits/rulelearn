@@ -46,18 +46,23 @@ public class Sampler {
     }
 
     public int[] getWeightedBootstrap(int size) {
-        int bootstrapSize = data.getNumberOfObjects();
+        int datasetSize = data.getNumberOfObjects();
         int[] sample = new int[size];
         int i = 0;
-        int j = 0;
         while (i < size) {
-            if (randomLowerThanWeight(j)) {
-                sample[i] = j;
+            int randomIndex = randomIndexFromRange(0, datasetSize - 1);
+            if (randomLowerThanWeight(randomIndex)) {
+                sample[i] = randomIndex;
                 i++;
             }
-            j = (j + 1) % bootstrapSize;
         }
         return sample;
+    }
+
+    int randomIndexFromRange(int min, int max)
+    {
+        int range = (max - min) + 1;
+        return (int)(Math.random() * range) + min;
     }
 
     private boolean randomLowerThanWeight(int index) {
