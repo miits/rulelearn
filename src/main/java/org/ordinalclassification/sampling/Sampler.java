@@ -54,19 +54,11 @@ public class Sampler {
         int[] sample = new int[size];
         int i = 0;
         while (i < size) {
-            int randomIndex = randomIndexFromRange(0, datasetSize - 1);
+            int randomIndex = randomGenerator.nextInt(datasetSize);
             if (randomLowerThanWeight(randomIndex)) {
                 sample[i] = randomIndex;
                 i++;
             }
-        }
-        return sample;
-    }
-
-    public int[] getWeightedRandomSample() {
-        int[] sample = new int[data.getNumberOfObjects()];
-        for (int i = 0; i < data.getNumberOfObjects(); i++) {
-            sample[i] = getRandomIndex();
         }
         return sample;
     }
@@ -77,35 +69,8 @@ public class Sampler {
         Arrays.fill(weights, 1.0);
     }
 
-    private int randomIndexFromRange(int min, int max)
-    {
-        int range = (max - min) + 1;
-        return randomGenerator.nextInt(range) + min;
-    }
-
     private boolean randomLowerThanWeight(int index) {
         double rand = Math.random();
         return rand < weights[index];
-    }
-
-    private int getRandomIndex() {
-        double[] cumulativeWeights = getWeightsCumulativeSum();
-        double rand = Math.random();
-        for (int i = 0; i < cumulativeWeights.length; i++) {
-            if (rand < cumulativeWeights[i]) {
-                return i;
-            }
-        }
-        return cumulativeWeights.length - 1;
-    }
-
-    private double[] getWeightsCumulativeSum() {
-        double[] cumSum = new double[weights.length];
-        double total = 0.0;
-        for (int i = 0; i < weights.length; i++) {
-            total += weights[i];
-            cumSum[i] = total;
-        }
-        return cumSum;
     }
 }

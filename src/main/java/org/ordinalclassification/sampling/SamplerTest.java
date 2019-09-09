@@ -82,7 +82,9 @@ public class SamplerTest implements DatasetOperation {
             String dataset = entry.getKey();
             String filepath = Paths.get(resultsPath, dataset + ".csv").toString();
             File f = new File(filepath);
-            f.delete();
+            if (f.exists()) {
+                f.delete();
+            }
         }
         for (Map.Entry<String, ArrayList<int[]>> entry : resultsByDatasetName.entrySet()) {
             String dataset = entry.getKey();
