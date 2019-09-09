@@ -4,13 +4,17 @@ import org.rulelearn.data.InformationTableWithDecisionDistributions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Sampler {
     private InformationTableWithDecisionDistributions data;
     private double[] weights;
+    private Random randomGenerator;
+
 
     public Sampler(InformationTableWithDecisionDistributions data) {
         this.data = data;
+        this.randomGenerator = new Random();
     }
 
     public Sampler(InformationTableWithDecisionDistributions data, double[] weights) {
@@ -59,23 +63,29 @@ public class Sampler {
         return sample;
     }
 
-    int randomIndexFromRange(int min, int max)
-    {
-        int range = (max - min) + 1;
-        return (int)(Math.random() * range) + min;
-    }
-
-    private boolean randomLowerThanWeight(int index) {
-        double rand = Math.random();
-        return rand < weights[index];
-    }
-
     public int[] getWeightedRandomSample() {
         int[] sample = new int[data.getNumberOfObjects()];
         for (int i = 0; i < data.getNumberOfObjects(); i++) {
             sample[i] = getRandomIndex();
         }
         return sample;
+    }
+
+    private void initWeights() {
+        int size = data.getNumberOfObjects();
+        weights = new double[size];
+        Arrays.fill(weights, 1.0);
+    }
+
+    private int randomIndexFromRange(int min, int max)
+    {
+        int range = (max - min) + 1;
+        return randomGenerator.nextInt(range) + min;
+    }
+
+    private boolean randomLowerThanWeight(int index) {
+        double rand = Math.random();
+        return rand < weights[index];
     }
 
     private int getRandomIndex() {
@@ -97,11 +107,5 @@ public class Sampler {
             cumSum[i] = total;
         }
         return cumSum;
-    }
-
-    private void initWeights() {
-        int size = data.getNumberOfObjects();
-        weights = new double[size];
-        Arrays.fill(weights, 1.0);
     }
 }
