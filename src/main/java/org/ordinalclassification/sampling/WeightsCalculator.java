@@ -4,17 +4,24 @@ import org.rulelearn.data.Decision;
 import org.rulelearn.data.DecisionDistribution;
 import org.rulelearn.data.InformationTableWithDecisionDistributions;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-public class ClassBalanceWeightsCalculator {
-    public static double[] getWeights(InformationTableWithDecisionDistributions data) {
+public class WeightsCalculator {
+    public static double[] getClassCountWeights(InformationTableWithDecisionDistributions data) {
         double[] weights = new double[data.getNumberOfObjects()];
         DecisionDistribution decisionDistribution = data.getDecisionDistribution();
-        int minCount = getMinCount(decisionDistribution);
         for (int i = 0; i < data.getNumberOfObjects(); i++) {
             Decision decision = data.getDecision(i);
-            weights[i] = (double) minCount / (double) decisionDistribution.getCount(decision);
+            weights[i] = decisionDistribution.getCount(decision);
         }
+        return weights;
+    }
+
+    public static double[] getInverseClassCountWeights(InformationTableWithDecisionDistributions data) {
+        double[] weights = getClassCountWeights(data);
+        weights = Arrays.stream(weights).map(x -> 1.0 / x).toArray();
         return weights;
     }
 

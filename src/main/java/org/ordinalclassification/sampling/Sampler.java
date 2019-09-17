@@ -20,6 +20,7 @@ public class Sampler {
     public Sampler(InformationTableWithDecisionDistributions data, double[] weights) {
         this.data = data;
         this.weights = weights;
+        normalizeWeights();
     }
 
     public double[] getWeights() {
@@ -32,12 +33,6 @@ public class Sampler {
 
     public void setOnesWeights() {
         initWeights();
-    }
-
-    public void setUniformDistributionWeights() {
-        int size = data.getNumberOfObjects();
-        weights = new double[size];
-        Arrays.fill(weights, 1.0 / (double) size);
     }
 
     public ArrayList<int[]> getWeightedRandomSamples(int nSamples, int size) {
@@ -67,6 +62,14 @@ public class Sampler {
         int size = data.getNumberOfObjects();
         weights = new double[size];
         Arrays.fill(weights, 1.0);
+    }
+
+    private void normalizeWeights() {
+        int size = weights.length;
+        double max = Arrays.stream(weights).max().getAsDouble();
+        for (int i = 0; i < size; i++) {
+            weights[i] = weights[i] / max;
+        }
     }
 
     private boolean randomLowerThanWeight(int index) {
