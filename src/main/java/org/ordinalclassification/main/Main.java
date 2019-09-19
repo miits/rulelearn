@@ -57,10 +57,4 @@ public class Main {
         SampleAnalyzer analyzer = new SampleAnalyzer(weightsMode, sampleSizeMode, nSamples);
         iterator.iterate(analyzer);
     }
-
-    private static void checkArgs(String[] args) {
-        if (args.length < 3) {
-            throw new IllegalArgumentException("Argument missing");
-        }
-    }
 }
