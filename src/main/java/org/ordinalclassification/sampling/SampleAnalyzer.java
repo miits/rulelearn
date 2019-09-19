@@ -23,14 +23,16 @@ public class SampleAnalyzer implements DatasetOperation{
     private String resultsPath;
     private String weightsMode;
     private String sampleSizeMode;
+    private int nSamples;
     private String datasetName;
     private HashMap<String, ArrayList<int[]>> resultsByDatasetName;
     private InformationTableWithDecisionDistributions informationTable;
     private String csvSeparator = ",";
 
-    public SampleAnalyzer(String weightsMode, String sampleSizeMode) {
+    public SampleAnalyzer(String weightsMode, String sampleSizeMode, int nSamples) {
         this.weightsMode = weightsMode;
         this.sampleSizeMode = sampleSizeMode;
+        this.nSamples = nSamples;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class SampleAnalyzer implements DatasetOperation{
             loadArgs(args);
             loadData();
             runSampler();
-            runAnalyzer();
+            runNeighbourhoodAnalyzer();
             saveResults();
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,7 +81,7 @@ public class SampleAnalyzer implements DatasetOperation{
         Sampler sampler = new Sampler(informationTable);
         setWeights(sampler);
         int size = getSampleSize();
-        ArrayList<int[]> results = sampler.getWeightedRandomSamples(10, size);
+        ArrayList<int[]> results = sampler.getWeightedRandomSamples(nSamples, size);
         resultsByDatasetName.put(datasetName, results);
     }
 
@@ -105,7 +107,7 @@ public class SampleAnalyzer implements DatasetOperation{
         return informationTable.getNumberOfObjects();
     }
 
-    private void runAnalyzer() {
+    private void runNeighbourhoodAnalyzer() {
 
     }
 

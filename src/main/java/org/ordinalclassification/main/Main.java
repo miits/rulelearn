@@ -39,8 +39,22 @@ public class Main {
         if (args.length < 3) {
             throw new IllegalArgumentException("Argument missing");
         }
-        JsonCsvDatasetIterator iterator = new JsonCsvDatasetIterator(args[0], args[1], args[2], 5, "");
-        SampleAnalyzer analyzer = new SampleAnalyzer(args[3], args[4]);
+        String measureName = "";
+        String weightsMode = "";
+        String sampleSizeMode = "";
+        int nSamples;
+        if (args.length > 7) {
+            measureName = args[4];
+            weightsMode = args[5];
+            sampleSizeMode = args[6];
+            nSamples = Integer.parseInt(args[7]);
+        } else {
+            weightsMode = args[4];
+            sampleSizeMode = args[5];
+            nSamples = Integer.parseInt(args[6]);
+        }
+        JsonCsvDatasetIterator iterator = new JsonCsvDatasetIterator(args[0], args[1], args[2], Integer.parseInt(args[3]), measureName);
+        SampleAnalyzer analyzer = new SampleAnalyzer(weightsMode, sampleSizeMode, nSamples);
         iterator.iterate(analyzer);
     }
 
