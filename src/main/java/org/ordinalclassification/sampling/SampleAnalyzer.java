@@ -2,6 +2,7 @@ package org.ordinalclassification.sampling;
 
 import org.apache.commons.io.FilenameUtils;
 import org.ordinalclassification.utils.DatasetOperation;
+import org.ordinalclassification.utils.NeighbourhoodAnalyzer;
 import org.rulelearn.data.DecisionDistribution;
 import org.rulelearn.data.InformationTableBuilder;
 import org.rulelearn.data.InformationTableWithDecisionDistributions;
@@ -15,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SampleAnalyzer implements DatasetOperation{
@@ -24,6 +26,8 @@ public class SampleAnalyzer implements DatasetOperation{
     private String weightsMode;
     private String sampleSizeMode;
     private int nSamples;
+    private int k;
+    private String measure;
     private String datasetName;
     private HashMap<String, ArrayList<int[]>> resultsByDatasetName;
     private InformationTableWithDecisionDistributions informationTable;
@@ -42,7 +46,6 @@ public class SampleAnalyzer implements DatasetOperation{
             loadData();
             runSampler();
             runNeighbourhoodAnalyzer();
-            saveResults();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,6 +60,8 @@ public class SampleAnalyzer implements DatasetOperation{
         jsonPath = args[0];
         csvPath = args[1];
         resultsPath = Paths.get(args[2]).getParent().toString();
+        k = Integer.parseInt(args[3]);
+        measure = args[4];
         setDatasetName();
     }
 
@@ -78,6 +83,7 @@ public class SampleAnalyzer implements DatasetOperation{
     }
 
     private void runSampler() {
+        System.out.println("[SampleAnalyzer] Generating samples");
         Sampler sampler = new Sampler(informationTable);
         setWeights(sampler);
         int size = getSampleSize();
@@ -107,26 +113,21 @@ public class SampleAnalyzer implements DatasetOperation{
         return informationTable.getNumberOfObjects();
     }
 
-    private void runNeighbourhoodAnalyzer() {
-
-    }
-
-    private void saveResults() throws IOException {
-        System.out.println(String.format("Saving results for %s", datasetName));
-//        createResultsDirIfNotExists();
-//        for (Map.Entry<String, ArrayList<int[]>> entry : resultsByDatasetName.entrySet()) {
-//            String dataset = entry.getKey();
-//            String filepath = Paths.get(resultsPath, dataset + ".csv").toString();
-//            File f = new File(filepath);
-//            if (f.exists()) {
-//                f.delete();
-//            }
-//        }
-//        for (Map.Entry<String, ArrayList<int[]>> entry : resultsByDatasetName.entrySet()) {
-//            String dataset = entry.getKey();
-//            ArrayList<int[]> indicesSet = entry.getValue();
-//            saveIndicesSetToCsv(dataset, indicesSet);
-//        }
+    private void runNeighbourhoodAnalyzer() throws IOException {
+        for (Map.Entry<String, ArrayList<int[]>> entry: resultsByDatasetName.entrySet()) {
+            ArrayList<int[]> samples = entry.getValue();
+            int i = 0;
+            for (int[] sampleIndices: samples) {
+                i++;
+                System.out.println(String.format("[SampleAnalyzer] Analyzing sample %d/%d", i, nSamples));
+                InformationTableWithDecisionDistributions sample = new InformationTableWithDecisionDistributions(informationTable.select(sampleIndices));
+                String sampleResultsPath = String.format("%s/%s/%s_%d", resultsPath, datasetName, "sample", i);
+                NeighbourhoodAnalyzer analyzer = new NeighbourhoodAnalyzer(csvPath, jsonPath, sampleResultsPath, k, measure);
+                analyzer.loadData(sample);
+                analyzer.analyze();
+                analyzer.saveResults();
+            }
+        }
     }
 
     private void createResultsDirIfNotExists() {

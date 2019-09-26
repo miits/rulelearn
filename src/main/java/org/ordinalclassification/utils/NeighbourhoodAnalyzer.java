@@ -103,7 +103,17 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
         resultsByName = new HashMap<>();
     }
 
-    private void analyze() {
+    public void loadData(InformationTableWithDecisionDistributions informationTable) {
+        dataExtractor = new DataSubsetExtractor(informationTable);
+        if (this.measureName.equals("RankHVDM")) {
+            measure = new RankHVDM(dataExtractor.getData());
+        } else {
+            measure = new HVDM(dataExtractor.getData());
+        }
+        resultsByName = new HashMap<>();
+    }
+
+    public void analyze() {
         Union[] atLeastUnions = dataExtractor.getAtLeastUnions();
         Union[] atMostUnions = dataExtractor.getAtMostUnions();
         Collections.reverse(Arrays.asList(atLeastUnions));
@@ -235,7 +245,7 @@ public class NeighbourhoodAnalyzer implements DatasetOperation {
         performKernelMonotonicAnalysis(majority, minority, majDecision, minDecision, classVsUnionKernelMonotonicFilename);
     }
 
-    private void saveResults() throws IOException {
+    public void saveResults() throws IOException {
         createDirIfNotExists();
         for (Map.Entry<String, AnalysisResult> entry : resultsByName.entrySet()) {
             AnalysisResult result = entry.getValue();

@@ -105,7 +105,7 @@ def get_as_df(filepath, u):
             i += 1
             df.loc[i] = [name[0], name[1], 0, 0, 0, 0, 0]
             previous_outer_group = current_outer_group
-        no_in_group = group['index'].agg('count')
+        no_in_group = len(group)  # ['index'].agg('count')
         total = count_divisions_grouped.get_group(current_outer_group)['index'].agg('sum')
         df.at[i, name[2].lower()] = no_in_group
         df.at[i, 'total'] = total
@@ -114,10 +114,7 @@ def get_as_df(filepath, u):
 
 def df_to_tex(df, u):
     header = ''
-    if u == 'class':
-        header = 'Class & Union &  & Total \\\\ \n'
-    else:
-        header = 'Union (min) & Union (maj) &  & Total \\\\ \n'
+    header = 'Minority & Majority &  & Total \\\\ \n'
     lines = [
         '\\begin{tabular}{lllr}\n',
         '\\toprule\n',
